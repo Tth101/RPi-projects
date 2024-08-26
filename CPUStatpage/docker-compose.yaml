@@ -1,13 +1,13 @@
 version: '3'
 services:
   cpu-stats:
+    build:
+      context: .
+      dockerfile: dockerfile
     image: python:3.12-slim  # You can replace this with your own image if needed
     container_name: cpu-stats-app
     ports:
-      - "8081:8081"  # Expose port 8080 for your web app
+      - "8081:81"  # Expose port for your web app
     volumes:
-      - /sys:/host/sys:ro  # Mount the /sys directory to access system stats like CPU info
-    environment:
-      - FLASK_ENV=development  # Example environment variable
-    command: python /app/app.py  # Command to run your web application
+      - .:/app:ro
     restart: unless-stopped
