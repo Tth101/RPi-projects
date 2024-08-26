@@ -15,7 +15,7 @@ COPY . .
 # Expose the port yfor application
 EXPOSE 81
 
-CMD ["python", "app.py"]
+CMD ["flask", "--app=app.py", "run", "--host=0.0.0.0"]
 
 # Specify the command to run on container start
 #CMD ["ls"]
