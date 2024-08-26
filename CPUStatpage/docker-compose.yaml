@@ -10,4 +10,6 @@ services:
       - "8081:81"  # Expose port for your web app
     volumes:
       - .:/app:ro
+    cap_add:
+      - NET_ADMIN
     restart: unless-stopped
