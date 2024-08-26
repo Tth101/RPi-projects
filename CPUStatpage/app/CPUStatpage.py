@@ -5,11 +5,11 @@ def command_output(command):
     output = result.stdout.strip()
     return output
 
-test = command_output("ipconfig")#get cpu temperature
+temp = command_output("ipconfig")#get cpu temperature
  
 #os.system("ipconfig") #get cpu memory
 #os.system("ipconfig") #get storage
 
 f = open("test.txt", "w")
-f.write(test)
+f.write(temp)
 f.close()
