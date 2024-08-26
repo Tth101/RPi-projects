@@ -12,12 +12,10 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 COPY . .
-# Expose the port yfor application
-EXPOSE 81
 
-CMD ["flask", "--app=app.py", "run", "--host=0.0.0.0"]
+# Expose the port for application (5000 is default flask port)
+EXPOSE 5000 
 
 # Specify the command to run on container start
-#CMD ["ls"]
-#CMD ["python", "app.py", "run"]
-#CMD ["flask", "--app /CPUStatpage/app.py", "run"]
+CMD ["flask", "--app=app.py", "run", "--host=0.0.0.0"]
+

@@ -3,12 +3,16 @@ services:
     build:
       context: app
       dockerfile: dockerfile
-    #image: python:3.12-slim  # You can replace this with your own image if needed
+
     container_name: cpu-stats-app
+
     ports:
-      - "8081:81"  # Expose port for your web app
+      - "8081:5000"  # Map host's port 8081 to container port 5000(default flask port)
+
     volumes:
       - .:/app:ro
+
     cap_add:
       - NET_ADMIN
+      
     restart: unless-stopped
