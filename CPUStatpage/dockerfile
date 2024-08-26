@@ -19,5 +19,5 @@ COPY . .
 EXPOSE 81
 
 # Specify the command to run on container start
-#CMD ["python3", "-m", "flask", "run", "--app = /CPUStatpage/app.py", "--host=0.0.0.0"]
+#CMD ["python3", "-m", "flask", "--app = /CPUStatpage/app.py", "--host=0.0.0.0", "run"]
 CMD ["flask", "run"]
