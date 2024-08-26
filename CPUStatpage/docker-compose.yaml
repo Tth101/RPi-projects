@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    image: python:3.12-slim  # You can replace this with your own image if needed
+    #image: python:3.12-slim  # You can replace this with your own image if needed
     container_name: cpu-stats-app
     ports:
       - "8081:81"  # Expose port for your web app
