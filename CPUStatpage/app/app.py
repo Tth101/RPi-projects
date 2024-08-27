@@ -12,6 +12,9 @@ def init_stats():
     mem = CPUStatpage.memcheck()
     return temp, mem
 
+temp = init_stats().temp
+mem = init_stats().mem
+
 t = Timer(5, init_stats)
 t.start()
 
