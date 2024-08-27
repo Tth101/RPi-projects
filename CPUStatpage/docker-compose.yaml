@@ -15,9 +15,10 @@ services:
 
     environment:
       - LD_LIBRARY_PATH=/usr/lib
-      
+
     devices:
       - /dev/vchiq
+      - /dev/vcio
 
     cap_add:
       - NET_ADMIN
