@@ -14,7 +14,7 @@ def init_stats(temp, mem):
     mem = CPUStatpage.memcheck()
     return temp, mem
 
-t = Timer(5, init_stats)
+t = Timer(5, init_stats(temp. mem))
 t.start()
 
 # home route that returns below text when root url is accessed
