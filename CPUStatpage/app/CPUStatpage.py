@@ -11,10 +11,10 @@ def file_write(content):
     f.close()
 
 def tempcheck():
-    msg = command_output("sudo cat /sys/class/thermal/thermal_zone0/temp") #get cpu temperature
-   # temp = re.search(r'-?\d\.?\d*', msg) #use regex to obtain temperature
-#   out = float(temp.group())
-    out = float(msg/1000)
+    msg = command_output("docker exec vcgencmd measure_temp") #get cpu temperature
+    temp = re.search(r'-?\d\.?\d*', msg) #use regex to obtain temperature
+    out = float(temp.group())
+    #out = float(msg/1000)
     return out
 
 def memcheck():
