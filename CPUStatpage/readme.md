@@ -5,6 +5,23 @@ This project was done with portainer and docker in a Raspberry Pi, with the goal
 ## Overview
 In this project, the aim will be to set up a container in docker with the files in this github repo, allowing us to run a web app which displays CPU stats obtained from various commands 
 
+## Procedure
+1. Hook up app.py to docker container using `docker-compose.yaml` & `dockerfile` and map ports to RPi to allow access from clients on the same network
+2. Set up front end for testing purposes
+3. Set up stats fetching 
+* You will need to import the necessary volumes and devices to be able to run `vcgencmd measure_temp`
+    ```
+    volumes:
+      - /usr:/usr
+
+    environment:
+      - LD_LIBRARY_PATH=/usr/lib
+
+    devices:
+      - /dev/vchiq
+      - /dev/vcio
+    ```
+
 ## Project folder structure
 
 

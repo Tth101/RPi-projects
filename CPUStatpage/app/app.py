@@ -5,13 +5,13 @@ import CPUStatpage
 # instance of flask application
 app = Flask(__name__)
 
-# initialise the text file storing CPU stats
-#data = CPUStatpage.init_file()
+# initialise variables
+temp = CPUStatpage.tempcheck()
 
 # home route that returns below text when root url is accessed
 @app.route("/")
 def hello_world():
-    return render_template('index.html')#, data = data
+    return render_template('index.html', temp = temp)
 
 if __name__ == '__main__':  
    app.run(debug=True)  
