@@ -6,7 +6,7 @@ import CPUStatpage
 app = Flask(__name__)
 
 # initialise the text file storing CPU stats
-data = CPUStatpage.init_data()
+data = CPUStatpage.init_file()
 
 # home route that returns below text when root url is accessed
 @app.route("/")
