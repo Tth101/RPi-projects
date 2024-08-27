@@ -5,9 +5,14 @@ def command_output(command):
     out = result.stdout.strip()
     return out
 
+def file_write(content):
+    f = open("stats.txt", "w")
+    f.write(content)
+    f.close()
+
 def tempcheck():
-    msg = command_output("ipconfig")#get cpu temperature
-    temp = re.search(r'-?\d\.?\d*', msg)#use regex to obtain temperature
+    msg = command_output("vcgencmd measure_temp") #get cpu temperature
+    temp = re.search(r'-?\d\.?\d*', msg) #use regex to obtain temperature
     out = float(temp.group())
     return out
 
@@ -17,16 +22,8 @@ def memcheck():
     out = float(mem.group())
     return out
 
-def init_text_file():
-    tempcheck()
- 
-
-
-
+def init_file():
+    file_write(tempcheck())
 
 #os.system("ipconfig") #get cpu memory
 #os.system("ipconfig") #get storage
-
-f = open("test.txt", "w")
-f.write(temp)
-f.close()
