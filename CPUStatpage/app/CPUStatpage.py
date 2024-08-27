@@ -11,7 +11,7 @@ def file_write(content):
     f.close()
 
 def tempcheck():
-    msg = command_output("docker exec vcgencmd measure_temp") #get cpu temperature
+    msg = command_output("vcgencmd measure_temp") #get cpu temperature
     temp = re.search(r'-?\d\.?\d*', msg) #use regex to obtain temperature
     out = float(temp.group())
     #out = float(msg/1000)
