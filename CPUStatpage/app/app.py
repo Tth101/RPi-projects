@@ -7,7 +7,8 @@ import CPUStatpage
 app = Flask(__name__)
 
 # initialise variables
-temp, mem = 0, 0
+temp = 0 
+mem = 0
 
 def init_stats(temp, mem):
     temp = CPUStatpage.tempcheck()
