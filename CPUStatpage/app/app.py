@@ -7,12 +7,14 @@ import CPUStatpage
 app = Flask(__name__)
 
 # initialise variables
-def init_stats():
+temp, mem = 0, 0
+
+def init_stats(temp, mem):
     temp = CPUStatpage.tempcheck()
     mem = CPUStatpage.memcheck()
     return temp, mem
 
-t = Timer(5, init_stats)
+t = Timer(5, init_stats(temp, mem))
 t.start()
 
 # home route that returns below text when root url is accessed
