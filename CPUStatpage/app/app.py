@@ -6,7 +6,7 @@ import CPUStatpage
 app = Flask(__name__)
 
 # initialise variables
-#temp = CPUStatpage.tempcheck()
+temp = CPUStatpage.tempcheck()
 
 # home route that returns below text when root url is accessed
 @app.route("/")
