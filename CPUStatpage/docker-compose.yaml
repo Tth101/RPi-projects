@@ -11,10 +11,10 @@ services:
 
     volumes:
       - .:/app:ro
-      - /usr:/usr
+      - /opt/vc:/opt/vc:ro
 
     environment:
-      - LD_LIBRARY_PATH=/usr/lib
+      - LD_LIBRARY_PATH=/opt/vc/lib
 
     devices:
       - /dev/vchiq

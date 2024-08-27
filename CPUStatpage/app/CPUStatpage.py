@@ -11,7 +11,7 @@ def command_output(command):
     #f.close()
 
 def tempcheck():
-    msg = command_output("vcgencmd measure_temp") #get cpu temperature
+    msg = command_output("/opt/vc/bin/vcgencmd measure_temp") #get cpu temperature
     temp = re.search(r'-?\d\.?\d*', msg) #use regex to obtain temperature
     out = float(temp.group())
     return out
