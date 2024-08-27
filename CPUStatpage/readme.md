@@ -27,5 +27,8 @@ docker 27.1.2
 portainer community edition 2.19.4
 ```
 
-## Important tip(s)
+## Important tip(s)/Useful information
 1. Do not name your `WORKDIR` in `dockerfile` the same as your folders in your project repo: troubleshooting will be quit difficult
+2. On python's `subprocess`: 
+    * [`Shell = true` or `Shell = false`?](https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess)
+    * [Running commands](https://martinheinz.dev/blog/98)

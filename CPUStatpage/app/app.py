@@ -1,5 +1,6 @@
 # import flast module
 from flask import Flask, render_template
+import CPUStatpage
 
 # instance of flask application
 app = Flask(__name__)
@@ -11,3 +12,6 @@ def hello_world():
 
 if __name__ == '__main__':  
    app.run(debug=True)  
+
+# initialise the text file storing CPU stats
+CPUStatpage.init_text_file()
