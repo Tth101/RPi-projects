@@ -13,3 +13,5 @@ def memcheck():
     ).decode()
     return msg
 
+tempcheck()
+memcheck()
