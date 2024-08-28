@@ -1,5 +1,5 @@
 function refresh_variables() {
-    fetch('../CPUStatpage.py/tempcheck')
+    fetch('../CPUStatpage.py')
     .then(response => response.json())
         .then(data => {
          // Display the result from the Python function
