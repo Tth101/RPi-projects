@@ -1,24 +1,12 @@
-const fs = require('node:fs');
-
-para = document.getElementById('stats_para').innerHTML
-
-//read and format file with CPU stats
-fs.readFile('../stats.txt', 'utf8', (err, data) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    else
-    para = data
+function refresh_variables() {
+    var pythonscript = "../CPUStatpage.py"
+    fetch('/init_stats')
+    .then(response => response.json())
+        .then(data => {
+         // Display the result from the Python function
+         document.getElementById('tmperature').innerText = data.message;
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
-
-    var f = evt.target.files[0];
-                if (f) {
-                    var r = new FileReader();
-                    r.onload = function(e) { 
-                        var contents = e.target.result;
-                    }
-                    r.readAsText(f);
-                } else {
-                    alert("Failed to load file");
-                }
+}
