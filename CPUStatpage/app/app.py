@@ -1,4 +1,3 @@
-# import flast module
 from flask import Flask, render_template
 from threading import Timer
 import CPUStatpage
