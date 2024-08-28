@@ -1,6 +1,6 @@
 function refresh_variables() {
     var pythonscript = "../CPUStatpage.py"
-    fetch('/init_stats')
+    fetch('/tempcheck')
     .then(response => response.json())
         .then(data => {
          // Display the result from the Python function
