@@ -3,20 +3,6 @@ redis:
   volumes:
     - ./redis.conf:/etc/redis.conf
 
-check_temperature:
-  build: docker-python3-rpi
-  container_name: cpu-stats-app
-  devices:
-    - "/dev/vchiq"
-  environment:
-    - LD_LIBRARY_PATH=/usr/lib
-  volumes:
-    - /usr:/usr 
-    - ./temperature_update.py:/etc/temperature_update.py:ro
-  links:
-    - redis 
-  command: python3 /etc/temperature_update.py
-
 cpu-stats:
     build:
       context: app
