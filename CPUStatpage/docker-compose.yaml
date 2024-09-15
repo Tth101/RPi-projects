@@ -1,25 +1,26 @@
-redis:
-    build: 
-      dockerfile: /dockerfiles/redis-dockerfile
-    volumes:
-      - ./redis.conf:/etc/redis.conf
+services:
+  redis:
+      build: 
+        dockerfile: /dockerfiles/redis-dockerfile
+      volumes:
+        - ./redis.conf:/etc/redis.conf
 
-cpu-stats:
-    build:
-      context: app
-      dockerfile: /dockerfiles/flask-dockerfile
-    volumes:
-      - .:/app:ro
-      - /usr:/usr 
+  cpu-stats:
+      build:
+        context: app
+        dockerfile: /dockerfiles/flask-dockerfile
+      volumes:
+        - .:/app:ro
+        - /usr:/usr 
 
-    environment:
-      - LD_LIBRARY_PATH=/usr/lib
+      environment:
+        - LD_LIBRARY_PATH=/usr/lib
 
-    devices:
-      - /dev/vchiq
-      - /dev/vcio
+      devices:
+        - /dev/vchiq
+        - /dev/vcio
 
-    cap_add:
-      - NET_ADMIN
+      cap_add:
+        - NET_ADMIN
 
-    restart: unless-stopped
+      restart: unless-stopped
