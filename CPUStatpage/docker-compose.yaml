@@ -1,14 +1,14 @@
 services:
   redis:
       build: 
-        dockerfile: /dockerfiles/redis-dockerfile
+        dockerfile: ./dockerfiles/redis-dockerfile
       volumes:
         - ./redis.conf:/etc/redis.conf
 
   cpu-stats:
       build:
         context: app
-        dockerfile: /dockerfiles/flask-dockerfile
+        dockerfile: ./dockerfiles/flask-dockerfile
       volumes:
         - .:/app:ro
         - /usr:/usr 
