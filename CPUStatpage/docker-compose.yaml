@@ -5,19 +5,17 @@ services:
       volumes:
         - ./redis.conf:/etc/redis.conf
 
-      container_name:
-        - cpu-stats-app-redis
+      container_name: cpu-stats-app-redis
 
   cpu-stats:
       build:
         context: app
         dockerfile: ./dockerfiles/flask-dockerfile
 
-      container_name:
-        - cpu-stats-app
+      container_name: cpu-stats-app
 
       ports:
-        - "8081:5000"  # Map host's port 8081 to container port 5000(default flask port)
+        - 8081:5000  # Map host's port 8081 to container port 5000(default flask port)
 
       volumes:
         - .:/app:ro
