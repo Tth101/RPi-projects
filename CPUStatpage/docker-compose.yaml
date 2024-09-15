@@ -1,38 +1,34 @@
-redis:
-  build: docker-redis-rpi
-  volumes:
-    - ./redis.conf:/etc/redis.conf
+services:
+  redis:
+      build: 
+        dockerfile: ./dockerfiles/redis-dockerfile
+      volumes:
+        - ./redis.conf:/etc/redis.conf
 
-check_temperature:
-  build: docker-python3-rpi
-  container_name: cpu-stats-app
-  devices:
-    - "/dev/vchiq"
-  environment:
-    - LD_LIBRARY_PATH=/usr/lib
-  volumes:
-    - /usr:/usr 
-    - ./temperature_update.py:/etc/temperature_update.py:ro
-  links:
-    - redis 
-  command: python3 /etc/temperature_update.py
+      container_name: cpu-stats-app-redis
 
-cpu-stats:
-    build:
-      context: app
-      dockerfile: dockerfile
-    volumes:
-      - .:/app:ro
-      - /usr:/usr 
+  cpu-stats:
+      build:
+        context: app
+        dockerfile: ./dockerfiles/flask-dockerfile
 
-    environment:
-      - LD_LIBRARY_PATH=/usr/lib
+      container_name: cpu-stats-app
 
-    devices:
-      - /dev/vchiq
-      - /dev/vcio
+      ports:
+        - 8081:5000  # Map host's port 8081 to container port 5000(default flask port)
 
-    cap_add:
-      - NET_ADMIN
+      volumes:
+        - .:/app:ro
+        - /usr:/usr 
 
-    restart: unless-stopped
+      environment:
+        - LD_LIBRARY_PATH=/usr/lib
+
+      devices:
+        - /dev/vchiq
+        - /dev/vcio
+
+      cap_add:
+        - NET_ADMIN
+
+      restart: unless-stopped
