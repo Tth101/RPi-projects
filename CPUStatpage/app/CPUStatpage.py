@@ -1,4 +1,4 @@
-import subprocess, re
+import subprocess, re, sqlite3
 
 def tempcheck():
     temp =subprocess.check_output(
@@ -12,6 +12,3 @@ def memcheck():
         ["../usr/bin/free", "-m"]
     ).decode()
     return msg
-
-tempcheck()
-memcheck()
