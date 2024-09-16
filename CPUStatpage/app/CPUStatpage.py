@@ -1,4 +1,4 @@
-import subprocess, re, sqlite3
+import subprocess, re
 
 def tempcheck():
     temp =subprocess.check_output(
