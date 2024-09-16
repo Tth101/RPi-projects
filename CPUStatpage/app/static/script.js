@@ -1,4 +1,7 @@
 function refresh_variables() {
+    //troubleshooting
+    document.getElementById("testing"),innerText += "buttonclick"
+
     fetch('../CPUStatpage.py')
     .then(response => response.json())
         .then(data => {
