@@ -2,7 +2,7 @@ services:
   cpu-stats:
       build:
         context: app
-        dockerfile: /flask-dockerfile
+        dockerfile: flask-dockerfile
 
       container_name: cpu-stats-app
 
