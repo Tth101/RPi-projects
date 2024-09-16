@@ -21,6 +21,7 @@ In this project, the aim will be to set up a container in docker with the files 
       - /dev/vchiq
       - /dev/vcio
     ```
+4. Set up database to store data and enable retrieval of data 
 
 ## Project folder structure
 
@@ -44,8 +45,13 @@ docker 27.1.2
 portainer community edition 2.19.4
 ```
 
-## Important tip(s)/Useful information
+## Important tip(s)/Useful information/References
 1. Do not name your `WORKDIR` in `dockerfile` the same as your folders in your project repo: troubleshooting will be quit difficult
 2. On python's `subprocess`: 
     * [Shell = true or Shell = false?](https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess)
     * [Running commands](https://martinheinz.dev/blog/98)
+3. Sqlite3 set up:
+    * [Sqlite3 set up for RPi](https://pimylifeup.com/raspberry-pi-sqlite/)
+    * [How to use flask with Sqlite3](https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3)
+4. Inspiration:
+    * [Similar project using Redis](https://github.com/tomnewport/rpi-docker-cpu-temperature-server)
