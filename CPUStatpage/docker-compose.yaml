@@ -10,8 +10,7 @@ services:
         - 8081:5000  # Map host's port 8081 to container port 5000(default flask port)
 
       volumes:
-        - .:/app
-        - ./app/db_data:/home/Tth/Databases/cpu-stats-app.db
+        - /home/Tth/Databases/cpu-stats-app.db:/database/cpu-stats-app.db
         - /usr:/usr 
 
       environment:
