@@ -2,7 +2,7 @@ from flask import Flask, render_template, g #g allows for global variables
 import CPUStatpage
 import sqlite3
 
-DATABASE = '../app/db_data'
+DATABASE = '../app/data.db'
 app = Flask(__name__) # instance of flask application
 temp, mem = 0, 1 
 
