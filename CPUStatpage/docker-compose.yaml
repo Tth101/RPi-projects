@@ -1,12 +1,4 @@
 services:
-  redis:
-      build: 
-        dockerfile: ./dockerfiles/redis-dockerfile
-      volumes:
-        - ./redis.conf:/etc/redis.conf
-
-      container_name: cpu-stats-app-redis
-
   cpu-stats:
       build:
         context: app
@@ -18,7 +10,9 @@ services:
         - 8081:5000  # Map host's port 8081 to container port 5000(default flask port)
 
       volumes:
-        - ./Databases/cpu-stats-app.db:db_data
+        - type: bind
+          source: ./Databases/cpu-stats-app.db
+          target: db_data
         - .:/app:ro
         - /usr:/usr 
 
