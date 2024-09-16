@@ -2,7 +2,7 @@ from flask import Flask, render_template, g #g allows for global variables
 import CPUStatpage
 import sqlite3
 
-DATABASE = '../database/data.db'
+DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
 temp, mem = 0, 1 
 
@@ -33,7 +33,7 @@ def main():
 @app.route("/")
 def index():
     data = str(get_db())
-    return render_template('index.html', temp = init_stats().temp, mem = mem, data = data) 
+    return render_template('index.html', temp = temp, mem = mem, data = data) 
 
 @app.route("/update")
 def update_db(conn, data):
