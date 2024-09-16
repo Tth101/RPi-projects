@@ -11,7 +11,7 @@ services:
 
       volumes:
         #- .:/database
-        - ./home/Tth/Databases/cpu-stats-app.db:./database/data.db
+        - /database/data.db:/home/Tth/Databases/cpu-stats-app.db
         - /usr:/usr 
 
       environment:
