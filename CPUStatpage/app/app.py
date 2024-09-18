@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, jsonify, g #g allows for global variables
 import CPUStatpage
 import sqlite3
+import re
 
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
