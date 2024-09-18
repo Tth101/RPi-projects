@@ -8,18 +8,18 @@ temp, mem = 0, 1
 
 # Database operations
 def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-        cursor = db.cursor()
-        cursor.execute("SELECT * FROM cpustats")
-    return cursor.fetchall()
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+    c.execute("SELECT * FROM cpustats")
+    rows = c.fetchall()
+    conn.close()
+    return rows
 
-def update_db(conn, data):
-    sql = ''' INSERT INTO cpustats (temp, mem, date)
-    VALUES(?, ?, DATE(now))'''
-    cur = conn.cursor()
-    cur.execute(sql, data)
+def insert_db(conn, data):
+    sql = '''INSERT INTO cpustats (temp, mem, date)
+    VALUES(?, ?, 'now')'''
+    c = conn.cursor()
+    c.execute(sql, data)
     conn.commit()
     #return cur.lastrowid
 
@@ -31,18 +31,14 @@ def index():
 
 @app.route("/update")
 def generate_stats():
-    try:
-        with sqlite3.connect(DATABASE) as conn:
-            data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
-            print(data)
-            update_db(conn, data)
-    except sqlite3.Error as e:
-        print(e)
-
+    conn = sqlite3.connect(DATABASE)
+    data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
+    print(data)
+    insert_db(conn, data)
     return data
 
 @app.teardown_appcontext
-def close_connection(exception):
+def close_connection():
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
