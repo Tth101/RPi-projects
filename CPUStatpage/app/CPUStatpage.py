@@ -5,12 +5,12 @@ def tempcheck():
         ["../usr/bin/vcgencmd", "measure_temp"]
     ).decode()
     temp = re.search(r'-?\d\.?\d*', temp) #Use regex to obtain temperature value
-    return temp
+    return temp.groups()
 
 def memcheck():
     mem = subprocess.check_output(
         ["../usr/bin/free"]
     ).decode()
     mem = re.findall(r'-?\d\-?\d*', mem) #Use regex to obtain memory values
-    return mem 
+    return mem.groups() 
     #Turn to string since sqlite3 returns re.match not supported
