@@ -21,7 +21,7 @@ def update_db(conn, data):
     cur = conn.cursor()
     cur.execute(sql, data)
     conn.commit()
-    return cur.lastrowid
+    #return cur.lastrowid
 
 # home route that returns below text when root url is accessed
 @app.route("/")
@@ -34,10 +34,10 @@ def generate_stats():
     try:
         with sqlite3.connect(DATABASE) as conn:
             data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
-            testoutput = update_db(conn, data)
+            print(data)
+            update_db(conn, data)
     except sqlite3.Error as e:
         print(e)
-    return testoutput
 
 @app.teardown_appcontext
 def close_connection(exception):
