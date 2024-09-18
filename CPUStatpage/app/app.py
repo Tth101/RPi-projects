@@ -4,7 +4,6 @@ import sqlite3
 
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
-temp, mem = 0, 1 
 
 # Database operations
 def get_db():
@@ -32,6 +31,7 @@ def index():
     temp = lasttuple[1]
 
     mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
+    print(mem)
     mem = jsonify({
         'Total'     : mem[0],
         'Used'      : mem[1],
