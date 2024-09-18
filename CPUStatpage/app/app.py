@@ -6,11 +6,6 @@ DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
 temp, mem = 0, 1 
 
-def init_stats(temp, mem):
-    temp = CPUStatpage.tempcheck()
-    mem = CPUStatpage.memcheck()
-    return temp, mem
-
 # Database operations
 def get_db():
     db = getattr(g, '_database', None)
@@ -20,22 +15,6 @@ def get_db():
         cursor.execute("SELECT * FROM cpustats")
     return cursor.fetchall()
 
-def main():
-    try:
-        with sqlite3.connect(DATABASE) as conn:
-            data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
-            update_db(conn, data)
-    except sqlite3.Error as e:
-        print(e)
-
-
-# home route that returns below text when root url is accessed
-@app.route("/")
-def index():
-    data = str(get_db())
-    return render_template('index.html', temp = temp, mem = mem, data = data) 
-
-@app.route("/update")
 def update_db(conn, data):
     sql = ''' INSERT INTO cpustats (temp, mem, date)
     VALUES(?, ?, DATE(now))'''
@@ -43,6 +22,21 @@ def update_db(conn, data):
     cur.execute(sql, data)
     conn.commit()
     return cur.lastrowid
+
+# home route that returns below text when root url is accessed
+@app.route("/")
+def index():
+    data = str(get_db())
+    return render_template('index.html', temp = temp, mem = mem, data = data) 
+
+@app.route("/update", methods=['POST'])
+def generate_stats():
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
+            update_db(conn, data)
+    except sqlite3.Error as e:
+        print(e)
 
 @app.teardown_appcontext
 def close_connection(exception):
