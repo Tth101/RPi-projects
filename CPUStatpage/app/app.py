@@ -1,7 +1,6 @@
-from flask import Flask, render_template, redirect, g #g allows for global variables
+from flask import Flask, render_template, redirect, jsonify, g #g allows for global variables
 import CPUStatpage
 import sqlite3
-import json
 
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
@@ -33,7 +32,7 @@ def index():
     temp = lasttuple[1]
 
     mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
-    mem = json.jsonify({
+    mem = jsonify({
         'Total'     : mem[0],
         'Used'      : mem[1],
         'Free'      : mem[2],
