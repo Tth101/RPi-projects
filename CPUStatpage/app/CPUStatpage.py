@@ -11,6 +11,7 @@ def memcheck():
     mem = subprocess.check_output(
         ["../usr/bin/free"]
     ).decode()
-    mem = re.findall(r'-?\d\-?\d*', mem) #Use regex to obtain memory values
+    mem = re.findall(r'-?\d\-?\d*', re.sub(r'\\n', '', mem)) #Use regex to obtain memory values
+    print(str(mem))
     return str(mem) 
     #Turn to string since sqlite3 returns re.match not supported
