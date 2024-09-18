@@ -5,6 +5,7 @@ import re
 
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
+temp, mem = 0, 0
 
 # Database operations
 def get_db():
