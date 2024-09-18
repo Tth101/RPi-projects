@@ -53,7 +53,7 @@ def index():
 @app.route("/update")
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
-    data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
+    data = (CPUStatpage.tempcheck(), str(CPUStatpage.memcheck()))
     insert_db(conn, data)
     return redirect("/")
 
