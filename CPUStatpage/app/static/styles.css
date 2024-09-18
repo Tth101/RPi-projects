@@ -3,3 +3,8 @@ body {
     /*rgb(168, 1, 168);*/
     color: white;
 }
+
+.btn {
+    background-color: white;
+    color: black;
+}
