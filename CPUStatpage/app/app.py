@@ -34,21 +34,7 @@ def index():
     else:
         lasttuple = data[len(data) - 1]
         temp = lasttuple[1]
-
-        mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
-        print(mem)
-        mem = jsonify({
-            'Total'     : mem[0],
-            'Used'      : mem[1],
-            'Free'      : mem[2],
-            'Shared'    : mem[3],
-            'Buff/Cache': mem[4],
-            'Available' : mem[5],
-            'STotal'    : mem[6],
-            'SUsed'     : mem[7],
-            'SFree'     : mem[8] 
-        })
-
+        mem = lasttuple[2].strip("'")# "Unstringing" list
         date = lasttuple[3]
     return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
