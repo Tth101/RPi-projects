@@ -29,6 +29,7 @@ def insert_db(conn, data):
 def index():
     data = str(get_db())
     lasttuple = data[len(data) - 1]
+    print(lasttuple)
     temp = lasttuple[1]
     mem = lasttuple[2]
     date = lasttuple[3]

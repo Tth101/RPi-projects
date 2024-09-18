@@ -21,7 +21,7 @@ In this project, the aim will be to set up a container in docker with the files 
       - /dev/vchiq
       - /dev/vcio
     ```
-4. Set up database to store data and enable retrieval of data 
+4. Set up database to store and retrieve data 
 
 ## Project folder structure
 
