@@ -29,7 +29,7 @@ def index():
     data = str(get_db())
     return render_template('index.html', temp = temp, mem = mem, data = data) 
 
-@app.route("/update", methods=['POST'])
+@app.route("/update")
 def generate_stats():
     try:
         with sqlite3.connect(DATABASE) as conn:
