@@ -26,7 +26,6 @@ def insert_db(conn, data):
 @app.route("/")
 def index():
     data = get_db()
-    print(data)
     if data == []:
         generate_stats()
 
