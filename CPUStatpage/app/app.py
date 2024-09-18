@@ -39,6 +39,8 @@ def generate_stats():
     except sqlite3.Error as e:
         print(e)
 
+    return data
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
