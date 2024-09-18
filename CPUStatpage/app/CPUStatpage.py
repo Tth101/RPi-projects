@@ -4,8 +4,8 @@ def tempcheck():
     temp =subprocess.check_output(
         ["../usr/bin/vcgencmd", "measure_temp"]
     ).decode()
-    temp = re.search(r'-?\d\.?\d*', temp) #Use regex to obtain temperature value
-    return temp.groups()
+    temp = re.search(r'\d*\.\d+', temp) #Use regex to obtain temperature value
+    return temp.group(0)
 
 def memcheck():
     mem = subprocess.check_output(
