@@ -27,7 +27,7 @@ def insert_db(conn, data):
 def index():
     data = get_db()
     print(data)
-    if data == None:
+    if data == []:
         generate_stats()
 
     else:
