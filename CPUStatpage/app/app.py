@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g #g allows for global variables
+from flask import Flask, render_template, redirect, g #g allows for global variables
 import CPUStatpage
 import sqlite3
 
@@ -34,9 +34,10 @@ def generate_stats():
     try:
         with sqlite3.connect(DATABASE) as conn:
             data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
-            update_db(conn, data)
+            testoutput = update_db(conn, data)
     except sqlite3.Error as e:
         print(e)
+    return testoutput
 
 @app.teardown_appcontext
 def close_connection(exception):
