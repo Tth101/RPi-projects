@@ -1,18 +1,18 @@
-from flask import Flask, render_template, redirect, g #g allows for global variables
+from flask import Flask, render_template, redirect, jsonify, g #g allows for global variables
 import CPUStatpage
 import sqlite3
-import json
+import re
 
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
-temp, mem = 0, 1 
+temp, mem = 0, 0
 
 # Database operations
 def get_db():
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("SELECT * FROM cpustats")
-    rows = c.fetchall()
+    rows = c.fetchall() 
     conn.close()
     return rows
 
@@ -28,30 +28,34 @@ def insert_db(conn, data):
 @app.route("/")
 def index():
     data = get_db()
-    lasttuple = data[len(data) - 1]
+    if data == []:
+        generate_stats()
 
-    temp = lasttuple[1]
+    else:
+        lasttuple = data[len(data) - 1]
+        temp = lasttuple[1]
 
-    mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
-    mem = json.jsonify({
-        'Total'     : mem[0],
-        'Used'      : mem[1],
-        'Free'      : mem[2],
-        'Shared'    : mem[3],
-        'Buff/Cache': mem[4],
-        'Available' : mem[5],
-        'STotal'    : mem[6],
-        'SUsed'     : mem[7],
-        'SFree'     : mem[8] 
-    })
+        mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
+        print(mem)
+        mem = jsonify({
+            'Total'     : mem[0],
+            'Used'      : mem[1],
+            'Free'      : mem[2],
+            'Shared'    : mem[3],
+            'Buff/Cache': mem[4],
+            'Available' : mem[5],
+            'STotal'    : mem[6],
+            'SUsed'     : mem[7],
+            'SFree'     : mem[8] 
+        })
 
-    date = lasttuple[3]
+        date = lasttuple[3]
     return render_template('index.html', temp = temp, mem = mem, date = date) 
 
 @app.route("/update")
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
-    data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
+    data = (CPUStatpage.tempcheck(), str(CPUStatpage.memcheck()))
     insert_db(conn, data)
     return redirect("/")
 
