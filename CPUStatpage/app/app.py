@@ -13,7 +13,6 @@ def get_db():
     c.execute("SELECT * FROM cpustats")
     rows = c.fetchall()
     conn.close()
-    print(rows)
     return rows
 
 def insert_db(conn, data):
@@ -27,7 +26,7 @@ def insert_db(conn, data):
 # home route that returns below text when root url is accessed
 @app.route("/")
 def index():
-    data = str(get_db())
+    data = get_db()
     lasttuple = data[len(data) - 1]
     print(lasttuple)
     temp = lasttuple[1]

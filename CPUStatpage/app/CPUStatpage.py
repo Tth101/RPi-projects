@@ -8,7 +8,8 @@ def tempcheck():
     return temp
 
 def memcheck():
-    msg = subprocess.check_output(
+    mem = subprocess.check_output(
         ["../usr/bin/free", "-m"]
     ).decode()
-    return msg
+    mem = re.findall(r'-?\d\-?\d*', mem)
+    return mem
