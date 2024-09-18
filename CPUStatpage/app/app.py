@@ -13,6 +13,7 @@ def get_db():
     c.execute("SELECT * FROM cpustats")
     rows = c.fetchall()
     conn.close()
+    print(rows)
     return rows
 
 def insert_db(conn, data):
@@ -21,7 +22,7 @@ def insert_db(conn, data):
     c = conn.cursor()
     c.execute(sql, data)
     conn.commit()
-    #return cur.lastrowid
+    conn.close()
 
 # home route that returns below text when root url is accessed
 @app.route("/")
@@ -33,7 +34,6 @@ def index():
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
     data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
-    print(data)
     insert_db(conn, data)
     return data
 
