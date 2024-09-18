@@ -10,7 +10,7 @@ def get_db():
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("SELECT * FROM cpustats")
-    rows = c.fetchall()
+    rows = c.fetchall() 
     conn.close()
     return rows
 
@@ -26,25 +26,29 @@ def insert_db(conn, data):
 @app.route("/")
 def index():
     data = get_db()
-    lasttuple = data[len(data) - 1]
 
-    temp = lasttuple[1]
+    if data == None:
+        generate_stats()
 
-    mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
-    print(mem)
-    mem = jsonify({
-        'Total'     : mem[0],
-        'Used'      : mem[1],
-        'Free'      : mem[2],
-        'Shared'    : mem[3],
-        'Buff/Cache': mem[4],
-        'Available' : mem[5],
-        'STotal'    : mem[6],
-        'SUsed'     : mem[7],
-        'SFree'     : mem[8] 
-    })
+    else:
+        lasttuple = data[len(data) - 1]
+        temp = lasttuple[1]
 
-    date = lasttuple[3]
+        mem = lasttuple[2].strip('][').split(', ') # "Unstringing" list
+        print(mem)
+        mem = jsonify({
+            'Total'     : mem[0],
+            'Used'      : mem[1],
+            'Free'      : mem[2],
+            'Shared'    : mem[3],
+            'Buff/Cache': mem[4],
+            'Available' : mem[5],
+            'STotal'    : mem[6],
+            'SUsed'     : mem[7],
+            'SFree'     : mem[8] 
+        })
+
+        date = lasttuple[3]
     return render_template('index.html', temp = temp, mem = mem, date = date) 
 
 @app.route("/update")
