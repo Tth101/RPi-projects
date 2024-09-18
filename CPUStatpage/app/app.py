@@ -18,7 +18,7 @@ def get_db():
 
 def insert_db(conn, data):
     sql = '''INSERT INTO cpustats (temp, mem, date)
-    VALUES(?, ?, 'now')'''
+    VALUES(?, ?, DATE('now'))'''
     c = conn.cursor()
     c.execute(sql, data)
     conn.commit()
@@ -28,14 +28,18 @@ def insert_db(conn, data):
 @app.route("/")
 def index():
     data = str(get_db())
-    return render_template('index.html', temp = temp, mem = mem, data = data) 
+    lasttuple = data[len(data) - 1]
+    temp = lasttuple[1]
+    mem = lasttuple[2]
+    date = lasttuple[3]
+    return render_template('index.html', temp = temp, mem = mem, date = date) 
 
 @app.route("/update")
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
     data = (CPUStatpage.tempcheck(), CPUStatpage.memcheck())
     insert_db(conn, data)
-    return data
+    return redirect("/")
 
 @app.teardown_appcontext
 def close_connection(exception):
