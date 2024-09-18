@@ -18,15 +18,14 @@
 
     <div class="container" id="temperature">
         <h2> 
-            CPU Temperature: {{ temp }} 
-            <i class="fa-solid fa-temperature-three-quarters"></i>
+            CPU Temperature <i class="fa-solid fa-temperature-three-quarters"></i>:
+            {{ temp }} 
         </h2>
     </div>
 
     <div class="container" id="memory">
         <h2> 
-            CPU Memory: {{ mem }} 
-            <i class="fa-solid fa-server"></i>
+            CPU Memory <i class="fa-solid fa-server"></i>:
         </h2>
     </div>
     <div class="container" id="date">
@@ -35,5 +34,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../static/script.js"></script>
+    <script>
+        function generate_table(data) {
+            data.forEach(row => {
+
+            });
+        }
+
+    </script>
 </body>
 </html>
