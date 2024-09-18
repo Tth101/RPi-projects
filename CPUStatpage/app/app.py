@@ -50,7 +50,7 @@ def index():
         })
 
         date = lasttuple[3]
-    return render_template('index.html', temp = temp, mem = mem, date = date) 
+    return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
 @app.route("/update")
 def generate_stats():

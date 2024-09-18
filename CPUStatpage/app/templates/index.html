@@ -13,7 +13,6 @@
         <h1>
             RPi CPU Stats
         </h1>
-        <a class="button" href="/update">Fetch CPU Stats</a>
     </div>
 
     <div class="container" id="temperature">
@@ -26,21 +25,30 @@
     <div class="container" id="memory">
         <h2> 
             CPU Memory <i class="fa-solid fa-server"></i>:
+            {{ mem }}
         </h2>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Used</th>
+                    <th scope="col">Free</th>
+                    <th scope="col">Shared</th>
+                    <th scope="col">Buff/Cache</th>
+                    <th scope="col">Available</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>                     
     </div>
     <div class="container" id="date">
         <h2> Date: {{ date }}</h2>
     </div>
+     
+    <a class="btn" href="/update">Fetch CPU Stats</a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../static/script.js"></script>
-    <script>
-        function generate_table(data) {
-            data.forEach(row => {
-
-            });
-        }
-
-    </script>
 </body>
 </html>
