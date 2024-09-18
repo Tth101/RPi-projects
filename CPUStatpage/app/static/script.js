@@ -1,14 +1,5 @@
-function refresh_variables() {
-    //troubleshooting
-    document.getElementById("testing"),innerText += "buttonclick"
-
-    fetch('../CPUStatpage.py')
-    .then(response => response.json())
-        .then(data => {
-         // Display the result from the Python function
-         document.getElementById('temperature').innerText = data.message;
-    })
-    .catch(error => {
-        console.error('Error:', error);
+function generate_table(data) {
+    data.forEach(row => {
+        
     });
 }
