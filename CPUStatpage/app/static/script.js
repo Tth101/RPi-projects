@@ -1,4 +1,4 @@
-function populate_tables(memtype, columns, data){ 
+function populate_tables(memtype, columns, data, j){ 
     out = `   
         <tr>
             <th scope="row" class="text-center">${memtype}</th>
@@ -6,8 +6,9 @@ function populate_tables(memtype, columns, data){
 
     for(let i = 0; i < columns - 1; i++){
         out += `
-            <td class="text-center"> ${data[i]} </td>
+            <td class="text-center"> ${data[j]} </td>
         `
+        j++
     }
 
     out += `
@@ -17,9 +18,10 @@ function populate_tables(memtype, columns, data){
 }
 
 function create_table(data){
-    data = data.replace(/['&#39;'\[\]]/g, "").split(',') 
+    data = data.replace(/(?:&#39;)+|[\[\]]+/g, "").split(',') 
+    dataindex = 0
     //remove unicode apostrophe and square brackets then split string into array
     var tbody = document.getElementById("table")
-    tbody.innerHTML = populate_tables("Memory", 6, data) + populate_tables("Swap", 3, data)
+    tbody.innerHTML = populate_tables("Memory", 6, data, dataindex) + populate_tables("Swap", 3, data, dataindex)
 }
 window.onload = create_table(data)
