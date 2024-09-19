@@ -24,7 +24,7 @@ def insert_db(conn, data):
     conn.commit()
     conn.close()
 
-# home route that returns below text when root url is accessed
+# routes
 @app.route("/")
 def index():
     data = get_db()
@@ -33,11 +33,7 @@ def index():
 
     else:
         lasttuple = data[len(data) - 1]
-        temp = lasttuple[1]
-        print(lasttuple[2])
-        mem = lasttuple[2].strip("'") # "Unstringing" list
-        print(mem)
-        date = lasttuple[3]
+        temp, mem, date = lasttuple[1], lasttuple[2], lasttuple[3]
     return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
 @app.route("/update")
