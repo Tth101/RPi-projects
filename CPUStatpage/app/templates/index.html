@@ -18,7 +18,7 @@
     <div class="container" id="temperature">
         <h2> 
             CPU Temperature <i class="fa-solid fa-temperature-three-quarters"></i>:
-            {{ temp }} 
+            {{ temp }} &#8451;
         </h2>
     </div>
 
@@ -30,7 +30,7 @@
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
                     <th scope="col">Total</th>
                     <th scope="col">Used</th>
                     <th scope="col">Free</th>
@@ -52,24 +52,7 @@
         <a class="btn" href="/update">Fetch CPU Stats</a>
     </div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        var tbody = document.getElementById("table")
-        var data = '{{ mem }}'
-
-        function populate_tables(memtype, columns){ 
-            out = `   
-                <tr>
-                    <th scope="row">${memtype}</th>
-                `
-
-            for(let i = 0; i > columns - 1; i++){
-                out += `
-                    <tr> ${data[0]} </tr>
-                `
-            }
-        }
-
-        tbody.innerHTML += populate_tables("Memory", 6) + populate_tables("Swap", 3)
-    </script>
+    <script>const data = '{{ mem }}' </script> // import jinja variable to external javascript
+    <script src="script.js"></script>
 </body>
 </html>
