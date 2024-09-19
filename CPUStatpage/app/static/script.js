@@ -1,12 +1,12 @@
 function populate_tables(memtype, columns, data){ 
     out = `   
         <tr>
-            <th scope="row">${memtype}</th>
+            <th scope="row" class="text-center">${memtype}</th>
         `
 
-    for(let i = 0; i > columns - 1; i++){
+    for(let i = 0; i < columns - 1; i++){
         out += `
-            <td> ${data[i]} </td>
+            <td class="text-center"> ${data[i]} </td>
         `
     }
 
