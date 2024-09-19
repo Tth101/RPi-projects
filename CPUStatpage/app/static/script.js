@@ -22,6 +22,6 @@ function create_table(data){
     dataindex = 0
     //remove unicode apostrophe and square brackets then split string into array
     var tbody = document.getElementById("table")
-    tbody.innerHTML = populate_tables("Memory", 6, data, dataindex) + populate_tables("Swap", 3, data, dataindex)
+    tbody.innerHTML = populate_tables("Memory", 7, data, 0) + populate_tables("Swap", 4, data, 6)
 }
 window.onload = create_table(data)
