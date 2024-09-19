@@ -34,7 +34,7 @@ def index():
     else:
         lasttuple = data[len(data) - 1]
         temp = lasttuple[1]
-        mem = lasttuple[2].strip("'") # "Unstringing" list
+        mem = lasttuple[2].replace("&#39", '') # "Unstringing" list
         date = lasttuple[3]
     return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
