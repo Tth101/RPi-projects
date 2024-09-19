@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, jsonify, g #g allows for global variables
+from flask import Flask, render_template, redirect, json, g #g allows for global variables
 import CPUStatpage
 import sqlite3
 import re
@@ -34,7 +34,7 @@ def index():
     else:
         lasttuple = data[len(data) - 1]
         temp = lasttuple[1]
-        mem = lasttuple[2].strip("'")# "Unstringing" list
+        mem = json.dumps(lasttuple[2].strip("'"))# "Unstringing" list
         date = lasttuple[3]
     return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
