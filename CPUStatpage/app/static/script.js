@@ -16,9 +16,9 @@ function populate_tables(memtype, columns, data){
     return out
 }
 
-function create_table(){
+function create_table(data){
     data.replace(/&#39;/g, "'")
     var tbody = document.getElementById("table")
     tbody.innerHTML = populate_tables("Memory", 6, data) + populate_tables("Swap", 3, data)
 }
-window.onload = create_table()
+window.onload = create_table(data)
