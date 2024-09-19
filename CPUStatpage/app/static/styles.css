@@ -8,3 +8,9 @@ body {
     background-color: white;
     color: black;
 }
+
+.btn:hover {
+    background-color: black;
+    color: white;
+    transition-duration: 0.2s;
+}
