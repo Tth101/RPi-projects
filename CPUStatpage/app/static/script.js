@@ -6,7 +6,7 @@ function populate_tables(memtype, columns, data){
 
     for(let i = 0; i > columns - 1; i++){
         out += `
-            <td> ${data[0]} </td>
+            <td> ${data[i]} </td>
         `
     }
 

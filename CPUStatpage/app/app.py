@@ -18,7 +18,7 @@ def get_db():
 
 def insert_db(conn, data):
     sql = '''INSERT INTO cpustats (temp, mem, date)
-    VALUES(?, ?, DATE('now'))'''
+    VALUES(?, ?, DATETIME('now'))'''
     c = conn.cursor()
     c.execute(sql, data)
     conn.commit()
