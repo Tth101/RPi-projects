@@ -13,4 +13,3 @@ def memcheck():
     ).decode()
     mem = re.findall(r'-?\d\-?\d*', mem) #Use regex to obtain memory values
     return mem
-    #Turn to string since sqlite3 returns re.match not supported

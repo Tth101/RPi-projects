@@ -17,8 +17,8 @@ function populate_tables(memtype, columns, data){
 }
 
 function create_table(data){
-    data.replace(/&#39;/g, "'")
-    data.replace("'", "")
+    data = data.replace(/['&#39;'\[\]]/g, "").split(',') 
+    //remove unicode apostrophe and square brackets then split string into array
     var tbody = document.getElementById("table")
     tbody.innerHTML = populate_tables("Memory", 6, data) + populate_tables("Swap", 3, data)
 }
