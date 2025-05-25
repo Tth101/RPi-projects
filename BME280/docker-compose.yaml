@@ -1,0 +1,18 @@
+services:
+  cpu-stats:
+      build:
+        context: app
+        dockerfile: dockerfile
+
+      container_name: BME280-app
+
+      ports:
+        - 8082:5000  # Map host's port 8082 to container port 5000(default flask port)
+
+      volumes:
+        - /home/Tth/Databases/BME280-app.db:/database/BME280-app.db
+
+      cap_add:
+        - NET_ADMIN
+
+      restart: unless-stopped
