@@ -49,3 +49,26 @@ RPI.BME280
 ## Important tip(s)/Useful information/References
 1. [Setting up BME280 on RPi](https://randomnerdtutorials.com/raspberry-pi-bme280-python/)
 2. [RPi pinout guide](https://randomnerdtutorials.com/raspberry-pi-pinout-gpios/)
+3. Caution against naming docker containers using capital letters
+    ```dockerfile
+    services: 
+    bme280-app
+        build:
+            context: app
+            dockerfile: dockerfile
+
+        container_name: bme280-app
+    . . .
+    ```
+     **VS**
+
+    ```dockerfile
+    services:
+    BME280-app:
+        build:
+            context: app
+            dockerfile: dockerfile
+
+        container_name: BME280-app
+    . . .
+    ```
