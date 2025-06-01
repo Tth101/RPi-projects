@@ -1,5 +1,5 @@
 services:
-  BME280-app:
+  bme280-app:
       build:
         context: app
         dockerfile: dockerfile
@@ -10,7 +10,7 @@ services:
         - 8082:5000  # Map host's port 8082 to container port 5000(default flask port)
 
       volumes:
-        - /home/Tth/Databases/BME280-app.db:/database/BME280-app.db
+        - /home/Tth/Databases/bme280-app.db:/database/bme280-app.db
 
       devices:
         - /dev/i2c-1
