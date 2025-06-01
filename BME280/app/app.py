@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, json, g #g allows for global
 import BME280
 import sqlite3
 
-DATABASE = '../database/cpu-stats-app.db'
+DATABASE = '../database/bme280-app.db'
 app = Flask(__name__) # instance of flask application
 
 # Database operations
