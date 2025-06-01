@@ -72,3 +72,4 @@ RPI.BME280
         container_name: BME280-app
     . . .
     ```
+4. When pulling and redeploying the stack, know that the image will not be pulled from the repo and hence any changes made to your dockerfile will not be reflected after. To update the image, you will have to remove the image before pulling and redeploying the stack from the repo.

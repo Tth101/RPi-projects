@@ -4,6 +4,7 @@ import sqlite3
 
 DATABASE = '../database/bme280-app.db'
 app = Flask(__name__) # instance of flask application
+temp, pressure, humidity = 0, 0, 0
 
 # Database operations
 def get_db():
@@ -32,7 +33,7 @@ def index():
     else:
         lasttuple = data[len(data) - 1]
         temp, pressure, humidity, date = lasttuple[1], lasttuple[2], lasttuple[3], lasttuple[4]
-    return render_template('index.html', temp = temp, pressure = pressure, humidity = humidity, date = date) 
+    return render_template('index.html', temp = temp, pressure = pressure, humidity = humidity, date = date, data=data) 
 
 @app.route("/update")
 def generate_stats():
