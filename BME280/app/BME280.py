@@ -1,5 +1,3 @@
-from flask import Flask
-import time
 import smbus2
 import bme280
 
