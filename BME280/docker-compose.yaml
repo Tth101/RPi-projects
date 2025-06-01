@@ -1,5 +1,5 @@
 services:
-  cpu-stats:
+  BME280-app:
       build:
         context: app
         dockerfile: dockerfile
@@ -11,6 +11,9 @@ services:
 
       volumes:
         - /home/Tth/Databases/BME280-app.db:/database/BME280-app.db
+
+      devices:
+        - /dev/i2c-1
 
       cap_add:
         - NET_ADMIN
