@@ -18,5 +18,5 @@ def readSurrounding():
     temp = data.temperature
     pressure = data.pressure
     humidity = data.humidity
-    out = [temp. pressure,humidity]
+    out = [temp, pressure,humidity]
     return out
