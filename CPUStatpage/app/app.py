@@ -13,6 +13,8 @@ def get_db():
     c.execute("SELECT * FROM cpustats")
     rows = c.fetchall() 
     conn.close()
+    if rows == None:
+        return None 
     return rows
 
 def insert_db(conn, data):
@@ -29,6 +31,9 @@ def index():
     data = get_db()
     if data == []:
         generate_stats()
+
+    if data == None:
+        print("app.py: app.route(\"/\") data = None")
 
     else:
         lasttuple = data[len(data) - 1]

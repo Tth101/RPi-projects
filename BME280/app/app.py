@@ -13,6 +13,8 @@ def get_db():
     c.execute("SELECT * FROM BME280")
     rows = c.fetchall() 
     conn.close()
+    if rows == None:
+        return None 
     return rows
 
 def insert_db(conn, data):
@@ -29,6 +31,9 @@ def index():
     data = get_db()
     if data == []:
         generate_stats()
+    
+    if data == None:
+        print("app.py: app.route(\"/\") data = None")
 
     else:
         lasttuple = data[len(data) - 1]
@@ -38,7 +43,9 @@ def index():
 @app.route("/update")
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
-    data = BME280.readSurrounding()
+    dataArr = BME280.readSurrounding()
+    data = (dataArr[0], dataArr[1], dataArr[2])
+    insert_db(conn, data)
     return redirect("/")
 
 @app.teardown_appcontext
