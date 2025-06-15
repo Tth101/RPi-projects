@@ -4,7 +4,7 @@ import sqlite3
 
 DATABASE = '../database/bme280-app.db'
 app = Flask(__name__) # instance of flask application
-temp, pressure, humidity = 0, 0, 0
+temp, pressure, humidity = 0.0, 0.0, 0.0
 
 # Database operations
 def get_db():
