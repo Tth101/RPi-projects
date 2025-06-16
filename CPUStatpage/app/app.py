@@ -15,7 +15,7 @@ def get_db():
     conn.close()
     if rows == None:
         return None 
-    logger.info("get_db() rows: " + rows)   
+    logger.info("get_db() rows: %s", rows)   
     return rows
 
 def insert_db(conn, data):
@@ -25,7 +25,7 @@ def insert_db(conn, data):
     c.execute(sql, data)
     conn.commit()
     conn.close()
-    logger.info("insert_db() data: " + data)
+    logger.info("insert_db() data: %s", data)
 
 # routes
 @app.route("/")
@@ -35,7 +35,7 @@ def index():
         generate_stats()
 
     if data == None:
-        print("app.py: app.route(\"/\") data = None")
+        print("app.py: app.route(\"/\") data: %s", data)
 
     else:
         lasttuple = data[len(data) - 1]
@@ -48,7 +48,7 @@ def index():
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
     data = (CPUStatpage.tempcheck(), str(CPUStatpage.memcheck()))
-    logger.info("app.route(\"/update\") data: " + data)
+    logger.info("app.route(\"/update\") data: %s", data)
     insert_db(conn, data)
     return redirect("/")
 
