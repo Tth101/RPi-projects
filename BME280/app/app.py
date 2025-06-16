@@ -36,7 +36,7 @@ def index():
 
     else:
         lasttuple = data[len(data) - 1]
-        temp, pressure, humidity, date = lasttuple[1], lasttuple[2], lasttuple[3], lasttuple[4]
+        temp, pressure, humidity, date = lasttuple[1], lasttuple[2], lasttuple[3]#, lasttuple[4]
 
     logger.info("app.route(\"/\") data: %s", data)
     return render_template('index.html', temp = temp, pressure = pressure, humidity = humidity, date = date, data=data) 
