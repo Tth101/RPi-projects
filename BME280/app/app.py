@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, json, g #g allows for global variables
-import BME280, sqlite3, logging
+import BME280, sqlite3
 
-logger = logging.getLogger(__name__)
 DATABASE = '../database/bme280-app.db'
 app = Flask(__name__) # instance of flask application
 temp, pressure, humidity = 0.0, 0.0, 0.0
@@ -15,7 +14,7 @@ def get_db():
     conn.close()
     if rows == None:
         return None 
-    logger.info("get_db() rows: %s", rows)
+    print("get_db() rows: %s", rows)
     return rows
 
 def insert_db(conn, data):
@@ -25,7 +24,7 @@ def insert_db(conn, data):
     c.execute(sql, data)
     conn.commit()
     conn.close()
-    logger.info("insert_db() data: %s", data)
+    print("insert_db() data: %s", data)
 
 # routes
 @app.route("/")
@@ -36,9 +35,9 @@ def index():
 
     else:
         lasttuple = data[len(data) - 1]
-        temp, pressure, humidity, date = lasttuple[1], lasttuple[2], lasttuple[3], lasttuple[4]
+        temp, pressure, humidity, date = lasttuple[0], lasttuple[1], lasttuple[2], lasttuple[3]
 
-    logger.info("app.route(\"/\") data: %s", data)
+    print("app.route(\"/\") data: %s", data)
     return render_template('index.html', temp = temp, pressure = pressure, humidity = humidity, date = date, data=data) 
 
 @app.route("/update")
@@ -46,7 +45,7 @@ def generate_stats():
     conn = sqlite3.connect(DATABASE)
     dataArr = BME280.readSurrounding()
     data = (dataArr[0], dataArr[1], dataArr[2])
-    logger.info("app.route(\"/update\") data: %s \nBME280.readSurrounding() data: %s", data, dataArr)
+    print("app.route(\"/update\") data: %s \nBME280.readSurrounding() data: %s", data, dataArr)
     insert_db(conn, data)
     return redirect("/")
 

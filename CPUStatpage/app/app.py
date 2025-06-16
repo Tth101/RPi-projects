@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, json, g #g allows for global variables
-import CPUStatpage, sqlite3, logging
+import CPUStatpage, sqlite3
 
-logger = logging.getLogger(__name__)
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
 temp, mem = 0, 0
@@ -15,7 +14,7 @@ def get_db():
     conn.close()
     if rows == None:
         return None 
-    logger.info("get_db() rows: %s", rows)   
+    print("get_db() rows: %s", rows)   
     return rows
 
 def insert_db(conn, data):
@@ -25,7 +24,7 @@ def insert_db(conn, data):
     c.execute(sql, data)
     conn.commit()
     conn.close()
-    logger.info("insert_db() data: %s", data)
+    print("insert_db() data: %s", data)
 
 # routes
 @app.route("/")
@@ -41,14 +40,14 @@ def index():
         lasttuple = data[len(data) - 1]
         temp, mem, date = lasttuple[1], lasttuple[2], lasttuple[3]
 
-    logger.info("app.route(\"/\") data: " + data)
+    print("app.route(\"/\") data: " + data)
     return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
 @app.route("/update")
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
     data = (CPUStatpage.tempcheck(), str(CPUStatpage.memcheck()))
-    logger.info("app.route(\"/update\") data: %s", data)
+    print("app.route(\"/update\") data: %s", data)
     insert_db(conn, data)
     return redirect("/")
 
