@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, json, g #g allows for global variables
-import CPUStatpage
-import sqlite3
+import CPUStatpage, sqlite3, logging
 
+logger = logging.getLogger(__name__)
 DATABASE = '../database/cpu-stats-app.db'
 app = Flask(__name__) # instance of flask application
 temp, mem = 0, 0
@@ -15,6 +15,7 @@ def get_db():
     conn.close()
     if rows == None:
         return None 
+    logger.info("get_db() rows: " + rows)   
     return rows
 
 def insert_db(conn, data):
@@ -24,6 +25,7 @@ def insert_db(conn, data):
     c.execute(sql, data)
     conn.commit()
     conn.close()
+    logger.info("insert_db() data: " + data)
 
 # routes
 @app.route("/")
@@ -38,12 +40,15 @@ def index():
     else:
         lasttuple = data[len(data) - 1]
         temp, mem, date = lasttuple[1], lasttuple[2], lasttuple[3]
+
+    logger.info("app.route(\"/\") data: " + data)
     return render_template('index.html', temp = temp, mem = mem, date = date, data = data) 
 
 @app.route("/update")
 def generate_stats():
     conn = sqlite3.connect(DATABASE)
     data = (CPUStatpage.tempcheck(), str(CPUStatpage.memcheck()))
+    logger.info("app.route(\"/update\") data: " + data)
     insert_db(conn, data)
     return redirect("/")
 
