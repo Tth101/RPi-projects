@@ -15,7 +15,7 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik"
-        - "traefik.http.routers.homeDashboard.rule=Host(`vaultwarden.rpi.home.arpa`)"
+        - "traefik.http.routers.homeDashboard.rule=Host(`dashboard.rpi.home.arpa`)"
         - "traefik.http.services.homeDashboard.loadbalancer.server.port=8080"
 
       restart: unless-stopped
