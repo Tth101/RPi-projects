@@ -17,7 +17,7 @@ RUN go build .
 
 FROM alpine:3.21 AS final 
 
-COPY --from=builder /server /bin/server
+COPY --from=builder /server.exe /server.exe
 
 EXPOSE 8080
 
