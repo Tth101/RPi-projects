@@ -1,0 +1,26 @@
+services:
+  dashboard:
+      build:
+        context: src
+        dockerfile: dockerfile
+
+      container_name: home-dashboard
+
+      volumes:
+        - /home/Tth/Databases/homeDashboard.db:/src/database.db
+      
+      networks:
+        - traefik
+
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik"
+        - "traefik.http.routers.homeDashboard.rule=Host(`vaultwarden.rpi.home.arpa`)"
+        - "traefik.http.services.homeDashboard.loadbalancer.server.port=8080"
+
+      restart: unless-stopped
+
+networks:
+  traefik:
+    external:
+      true

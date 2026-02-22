@@ -1,0 +1,25 @@
+FROM golang:1.24-alpine AS builder
+
+ENV CGO_ENABLED=0 \
+    GOOS=windows \
+    GOARCH=amd64
+
+# Create and set the working directory
+WORKDIR /src
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN go build -o /server .
+
+FROM alpine:3.21 AS final 
+
+COPY --from=builder /server /bin/server
+
+EXPOSE 8080
+
+# Specify the command to run on container start
+CMD ["bin/server"]

@@ -1,0 +1,11 @@
+services:
+  StatsPage: "http://192.168.88.20:8081"
+  BMESensor: "http://192.168.88.20:8082"
+  Convertx: "https://convertx.rpi.home.arpa"
+  Vaultwarden: "https://vaultwarden.rpi.home.arpa"
+dashboards:
+  Traefik: "https://traefik.rpi.home.arpa/dashboard/"
+  PiHole: "https://pihole.rpi.home.arpa/admin"
+  Wireguard: "http://192.168.88.20:51821"
+information:
+  Whoami: "https://whoami.rpi.home.arpa"
