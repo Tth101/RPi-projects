@@ -1,6 +1,6 @@
 FROM golang:1.24-alpine AS builder
 
-ENV CGO_ENABLED=0 
+ENV CGO_ENABLED=0 GOARCH=arm64
 
 # Create and set the working directory
 WORKDIR /src
