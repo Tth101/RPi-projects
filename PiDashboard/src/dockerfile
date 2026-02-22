@@ -15,9 +15,9 @@ RUN go build .
 
 FROM alpine:3.21 AS final 
 
-COPY --from=builder /server.exe /server.exe
+# COPY --from=builder /server.exe /server.exe
 
 EXPOSE 8080
 
 # Specify the command to run on container start
-CMD ["./server.exe"]
+CMD ["/bin/server"]
