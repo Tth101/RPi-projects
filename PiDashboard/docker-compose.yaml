@@ -4,7 +4,7 @@ services:
         context: src
         dockerfile: dockerfile
 
-      container_name: home-dashboard
+      container_name: homedashboard
 
       volumes:
         - /home/Tth/Databases/homeDashboard.db:/src/database.db
