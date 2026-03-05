@@ -1,9 +1,10 @@
 services:
   dashboard:
-      image: homedashboard-image:1.0.0 
       build:
         context: src
         dockerfile: dockerfile
+
+      image: homedashboard-image:1.0.0 
 
       container_name: homedashboard
 
