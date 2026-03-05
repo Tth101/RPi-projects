@@ -1,5 +1,6 @@
 services:
   dashboard:
+      image: homedashboard-image:1.0.0 
       build:
         context: src
         dockerfile: dockerfile
