@@ -4,7 +4,7 @@ services:
         context: src
         dockerfile: dockerfile
 
-      image: homedashboard-image:1.0.0 
+      # image: homedashboard-image:1.0.0 
 
       container_name: homedashboard
 
