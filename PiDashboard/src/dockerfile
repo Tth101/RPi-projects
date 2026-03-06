@@ -8,16 +8,16 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o "./src/server" .
+RUN CGO_ENABLED=0 GOOS=linux go build -o server .
 # RUN go build -o server
 
 FROM alpine:3.21 AS final 
 
 WORKDIR /src
 
-COPY --from=builder /src/server .
+COPY --from=builder /bin/server .
 
 EXPOSE 8080
 
 # Specify the command to run on container start
-CMD ["/src/server"]
+CMD ["/bin/server"]
