@@ -20,4 +20,4 @@ COPY --from=builder /src/server .
 EXPOSE 8080
 
 # Specify the command to run on container start
-CMD ["/src/server"]
+CMD ["/src/server.exe"]
