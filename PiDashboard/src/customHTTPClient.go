@@ -7,8 +7,6 @@ import (
 	"os"
 );
 
-var CERT_PATH = "../certs/local.crt";
-
 func loadCert() []byte {
 	cert, err := os.ReadFile(CERT_PATH);
 	if err != nil {

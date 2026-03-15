@@ -12,6 +12,10 @@ var logger = zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr}).With().Timestamp
 var db *sql.DB;
 var selfSignedHTTPSClient *http.Client;
 var urls URLs;
+const DB_PATH = "/PiDashboard/database.db";
+const YAML_PATH = "/PiDashboard/URLs.yaml";
+const CERT_PATH = "/PiDashboard/certs/local.crt";
+const STATIC_DIR_PATH = "/PiDashboard/static";
 
 func main() {
     db = initDB();
@@ -30,7 +34,7 @@ func main() {
 func initDB() *sql.DB{
     logger.Info().Msg("Database initialising...")
 
-    if _, err := os.Stat("../database.db"); err != nil {
+    if _, err := os.Stat(DB_PATH); err != nil {
         if os.IsNotExist(err) { 
             logger.Info().Msg("Database file does not exist, will be created")
         } else {
@@ -39,7 +43,7 @@ func initDB() *sql.DB{
         }
     }
 
-	db, err := sql.Open("sqlite", "../database.db")
+	db, err := sql.Open("sqlite", DB_PATH)
 	if err != nil {
 		logger.Panic().Err(err).Msg("Error opening/creating database file")
 	}
@@ -53,7 +57,7 @@ func initDB() *sql.DB{
 
 func initServer() {
     router := http.ServeMux{};
-    fs := http.FileServer(http.Dir("../static"));
+    fs := http.FileServer(http.Dir(STATIC_DIR_PATH));
     router.Handle("/", fs);
     router.HandleFunc("/hc/new", getNewHC);
     router.HandleFunc("/hc/latest", getLatestHC);

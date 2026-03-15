@@ -13,7 +13,7 @@ type URLs struct {
 }
 
 func readYaml() URLs {
-	fileData, err := os.ReadFile("../URLs.yaml");
+	fileData, err := os.ReadFile(YAML_PATH);
 	if err != nil {
 		logger.Panic().Err(err).Msg("Error reading YAML file");
 	}

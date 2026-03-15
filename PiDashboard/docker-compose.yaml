@@ -1,15 +1,19 @@
 services:
   dashboard:
       build:
-        context: src
-        dockerfile: dockerfile
-
-      # image: homedashboard-image:1.0.0 
+      # build context should be the current directory instead of /src since by setting /src we 
+      # reduce the scope and are unable to copy the static, certs and yaml file into the 
+      # container
+        context: .
+        dockerfile: /src/dockerfile
 
       container_name: homedashboard
 
+      ports:
+        - 8080:8080
+
       volumes:
-        - /home/Tth/Databases/homeDashboard.db:/src/database.db
+        - /home/Tth/Databases/homeDashboard.db:/PiDashboard/database.db
       
       networks:
         - traefik
