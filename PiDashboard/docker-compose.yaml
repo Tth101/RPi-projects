@@ -5,7 +5,7 @@ services:
       # reduce the scope and are unable to copy the static, certs and yaml file into the 
       # container
         context: .
-        dockerfile: /src/dockerfile
+        dockerfile: dockerfile
 
       container_name: homedashboard
 
