@@ -14,8 +14,8 @@ var selfSignedHTTPSClient *http.Client;
 var urls URLs;
 const DB_PATH = "database.db";
 const YAML_PATH = "URLs.yaml";
-const CERT_PATH = "/certs/local.crt";
-const STATIC_DIR_PATH = "/static";
+const CERT_PATH = "./certs/local.crt";
+const STATIC_DIR_PATH = "./static";
 
 func main() {
     db = initDB();
