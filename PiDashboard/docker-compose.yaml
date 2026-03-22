@@ -10,7 +10,7 @@ services:
       container_name: homedashboard
 
       ports:
-        - 8080:8080
+        - 8080:8086
 
       volumes:
         - /home/Tth/Databases/homeDashboard.db:/PiDashboard/database.db
