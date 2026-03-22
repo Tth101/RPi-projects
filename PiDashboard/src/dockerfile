@@ -18,11 +18,11 @@ WORKDIR /PiDashboard
 #the /src/server only since we need the .go files 
 COPY --from=builder /PiDashboard . 
 
-COPY ./static ./static
+COPY PiDashboard/static ./static
 
-COPY ./certs ./certs
+COPY PiDashboard/certs ./certs
 
-COPY ./URLs.yaml .
+COPY .PiDashboard/URLs.yaml .
 
 EXPOSE 8080
 
