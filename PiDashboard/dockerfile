@@ -2,31 +2,28 @@ FROM golang:1.24-alpine AS builder
 
 WORKDIR /PiDashboard/src
 
-COPY /src/go.mod /src/go.sum ./ 
+# Copy dependency files first (better layer caching)
+COPY src/go.mod src/go.sum ./
 
 RUN go mod download
 
-COPY ./ ./
+# Copy only the Go source files
+COPY src/ ./
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o server .
 
-FROM alpine:3.21 AS final 
+FROM alpine:3.21 AS final
 
 WORKDIR /PiDashboard
 
-# copy all files from builder stage to final stage. Will copy the whole /src instead of 
-#the /src/server only since we need the .go files 
+# Copy ONLY the compiled binary from the builder stage
+COPY --from=builder /PiDashboard/src/server ./server
 
-#Try not copying .go files
-COPY --from=builder ./ ./
-
-COPY static ./static
-
-COPY certs ./certs
-
+# Copy static assets, certs and config from build context
+COPY static/ ./static/
+COPY certs/ ./certs/
 COPY URLs.yaml .
 
 EXPOSE 8080
 
-# Specify the command to run on container start
-CMD ["./src/server"]
+CMD ["./server"]
