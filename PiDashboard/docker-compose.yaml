@@ -9,10 +9,8 @@ services:
 
       container_name: homedashboard
 
-      # ports:
-      #   - 8081:8086
-
       volumes:
+      #Make sure homeDashboard.db is created/exists before running the container, otherwise it will create a dir and cause db reading issues
         - /home/Tth/Databases/homeDashboard.db:/PiDashboard/database.db
       
       networks:
@@ -22,7 +20,7 @@ services:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik"
         - "traefik.http.routers.homeDashboard.rule=Host(`dashboard.rpi.home.arpa`)"
-        - "traefik.http.services.homeDashboard.loadbalancer.server.port=8081"
+        - "traefik.http.services.homeDashboard.loadbalancer.server.port=8080"
 
       restart: unless-stopped
 

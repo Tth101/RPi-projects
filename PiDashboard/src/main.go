@@ -63,9 +63,9 @@ func initServer() {
     router.HandleFunc("/hc/latest", getLatestHC);
     router.HandleFunc("/urls", getURLs);
     router.HandleFunc("/info", getInfoContent);
-    logger.Info().Msg("Server started on 8081");
+    logger.Info().Msg("Server started on 8080");
     go func() {
-        if err := http.ListenAndServe(":8081", &router); err != nil {
+        if err := http.ListenAndServe(":8080", &router); err != nil {
             logger.Fatal().Err(err).Msg("HTTP Listener failed")
         }
     }()    

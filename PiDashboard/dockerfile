@@ -25,6 +25,6 @@ COPY static/ /PiDashboard/static/
 COPY certs/ /PiDashboard/certs/
 COPY URLs.yaml /PiDashboard/URLs.yaml
 
-EXPOSE 8080
+#EXPOSE 8080
 
 CMD ["./server"]
