@@ -6,7 +6,7 @@ COPY go.mod go.sum ./
 
 RUN go mod download
 
-# COPY ./ ./
+COPY ./ ./
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o server .
 
@@ -18,7 +18,7 @@ WORKDIR /PiDashboard
 #the /src/server only since we need the .go files 
 
 #Try not copying .go files
-COPY --from=builder /PiDashboard . 
+COPY --from=builder /PiDashboard/src/server . 
 
 COPY static ./static
 
