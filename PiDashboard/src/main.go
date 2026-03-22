@@ -12,10 +12,10 @@ var logger = zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr}).With().Timestamp
 var db *sql.DB;
 var selfSignedHTTPSClient *http.Client;
 var urls URLs;
-const DB_PATH = "database.db";
-const YAML_PATH = "URLs.yaml";
-const CERT_PATH = "./certs/local.crt";
-const STATIC_DIR_PATH = "./static";
+const DB_PATH = "./PiDashboard/database.db";
+const YAML_PATH = "./PiDashboard/URLs.yaml";
+const CERT_PATH = "./PiDashboard/certs/local.crt";
+const STATIC_DIR_PATH = "./PiDashboard/static";
 
 func main() {
     db = initDB();
