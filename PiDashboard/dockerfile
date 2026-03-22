@@ -20,9 +20,9 @@ WORKDIR /PiDashboard
 COPY --from=builder /PiDashboard/src/server ./server
 
 # Copy static assets, certs and config from build context
-COPY static/ ./static/
-COPY certs/ ./certs/
-COPY URLs.yaml .
+COPY static/ /PiDashboard/static/
+COPY certs/ /PiDashboard/certs/
+COPY URLs.yaml /PiDashboard/URLs.yaml
 
 EXPOSE 8080
 
