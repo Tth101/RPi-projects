@@ -22,7 +22,7 @@ services:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik"
         - "traefik.http.routers.homeDashboard.rule=Host(`dashboard.rpi.home.arpa`)"
-        - "traefik.http.services.homeDashboard.loadbalancer.server.port=8080"
+        - "traefik.http.services.homeDashboard.loadbalancer.server.port=8086"
 
       restart: unless-stopped
 
