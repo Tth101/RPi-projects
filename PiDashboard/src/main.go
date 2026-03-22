@@ -63,8 +63,8 @@ func initServer() {
     router.HandleFunc("/hc/latest", getLatestHC);
     router.HandleFunc("/urls", getURLs);
     router.HandleFunc("/info", getInfoContent);
-    logger.Info().Msg("Server started on 8080");
+    logger.Info().Msg("Server started on 8081");
     go func() {
-        http.ListenAndServe(":8080", &router);
+        http.ListenAndServe(":8081", &router);
     }()    
 }
