@@ -18,8 +18,6 @@ WORKDIR /PiDashboard
 #the /src/server only since we need the .go files 
 COPY --from=builder /PiDashboard . 
 
-# COPY --from=builder ../static ../static
-
 COPY /PiDashboard/static ./static
 
 COPY /PiDashboard/certs ./certs
