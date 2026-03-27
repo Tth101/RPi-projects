@@ -4,6 +4,8 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"net/http"
+	"net"
+	"context"
 	"os"
 );
 
@@ -16,12 +18,14 @@ func loadCert() []byte {
 	} else {
 		logger.Info().Msg("CA certificate loaded");
 	}
-	return cert;
+
+	return cert
 }
 
 func customHTTPClient() *http.Client {
 	logger.Info().Msg("Building HTTP client with self signed cert...");
-	
+
+	//Loading cert
 	cert := loadCert();
 
     rootCAs, err := x509.SystemCertPool()
@@ -41,11 +45,36 @@ func customHTTPClient() *http.Client {
 		Msg("Failed to append CA certificate");
     }
 
-    config := &tls.Config{
+    tlsConfig := &tls.Config{
         RootCAs: rootCAs,
     }
 
-    tr := &http.Transport{TLSClientConfig: config}
-	logger.Info().Msg("HTTP client with self signed cert successfully built");
+	//Setting DNS resolver
+	var (
+		dnsResolverIP = "192.168.88.20:53"
+		dnsResolverProtocol = "udp"
+	)
+
+	dialer := &net.Dialer{
+		Resolver: &net.Resolver{
+			PreferGo: true,
+			Dial: func(ctx context.Context, network, address string) (net.Conn, error) {
+				d := net.Dialer{}
+				return d.DialContext(ctx, dnsResolverProtocol, dnsResolverIP)
+			},
+		},
+	}
+	
+	dialContext := func(ctx context.Context, network, address string) (net.Conn, error) {
+		return dialer.DialContext(ctx, network, address)
+	}
+
+	tr := &http.Transport{
+		TLSClientConfig: tlsConfig,
+		DialContext: dialContext,
+	}
+
+	logger.Info().Msg("HTTP client successfully built");
+
     return &http.Client{Transport: tr}
 }
