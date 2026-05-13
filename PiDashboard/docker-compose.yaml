@@ -17,6 +17,9 @@ services:
         - traefik
         - dns_net
 
+      dns:
+        - 172.18.0.2
+
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik"
