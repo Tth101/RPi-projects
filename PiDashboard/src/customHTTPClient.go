@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"net/http"
 	"net"
-	"context"
+	"net/http"
 	"os"
 );
 
@@ -46,6 +46,7 @@ func customHTTPClient() *http.Client {
     }
 
     tlsConfig := &tls.Config{
+		InsecureSkipVerify: true, //See if can remove this
         RootCAs: rootCAs,
     }
 
