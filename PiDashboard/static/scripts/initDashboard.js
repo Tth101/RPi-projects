@@ -16,7 +16,7 @@ async function initDashboard() {
 }
 
 async function obtainURLs() {
-    res = await fetch("http://localhost:8080/urls");
+    res = await fetch("https://localhost:8080/urls");
     data = await res.json();
     //By default should be capitalised for global scope in go
     URLs.services = data.Services;
@@ -36,7 +36,7 @@ function populateDashboardDropdown() {
 }
 
 async function fetchInfoContent() {
-    res= await fetch("http://localhost:8080/info")
+    res= await fetch("https://localhost:8080/info")
     data = await res.json()
     return data;
 }

@@ -11,7 +11,7 @@ function hideThrobber() {
 
 function healthcheck() {
     showThrobber();
-    fetch("http://localhost:8080/hc/new")
+    fetch("https://localhost:8080/hc/new")
     .then(res => {
         res.json().then(data => {
             document.getElementById("lastUpdate").innerText = new Date().toLocaleString();
@@ -23,7 +23,7 @@ function healthcheck() {
 
 function getLatestHealthcheck() {
     showThrobber();
-    fetch("http://localhost:8080/hc/latest")
+    fetch("https://localhost:8080/hc/latest")
     .then(res => {
         res.json().then(data => {
             document.getElementById("lastUpdate").innerText = data.Datetime;
