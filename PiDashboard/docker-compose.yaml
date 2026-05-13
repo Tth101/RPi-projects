@@ -17,9 +17,6 @@ services:
         - traefik
         - dns_net
 
-      dns:
-        - unbound #Reference to unbound container
-
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik"
