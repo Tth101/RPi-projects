@@ -31,3 +31,5 @@ services:
 networks:
   traefik:
     external: true
+  dns_net:
+    external: true
