@@ -39,5 +39,5 @@ services:
       - '/opt/homelab/Unbound:/opt/unbound/etc/unbound'
     networks:
       dns_net:
-	ipv4_address: 172.18.0.2 #For Pihole and dnsmasq configs
+        ipv4_address: 172.18.0.2 #For Pihole and dnsmasq configs
     restart: unless-stopped
