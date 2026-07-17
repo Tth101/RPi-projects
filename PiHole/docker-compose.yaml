@@ -1,22 +1,41 @@
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+networks:
+  dns_net: 
+    external: true
+  traefik:
+    external: true    
+
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    networks:
+      - traefik
+      - dns_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.rpi.home.arpa`)"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "8080:80/tcp"
+
     environment:
       TZ: 'Singapore'
-      # WEBPASSWORD: 'set a secure password here or it will be random'
-    # Volumes store your data between container upgrades
+      FTLCONF_webserver_api_password: 'pihole'
+      FTLCONF_dns_upstreams: 'unbound#53'
+      FTLCONF_dns_listeningMode: ALL
+      FTLCONF_dns_cache_size: 0 #remove me for prod
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+      - '/home/Tth/PiHole/etc-pihole:/etc/pihole'
+      - '/home/Tth/PiHole/etc-dnsmasq.d:/etc/dnsmasq.d'
+    restart: unless-stopped
+
+  unbound:
+    container_name: unbound
+    image: pedantic/unbound:latest
+    volumes:
+      - '/home/Tth/Unbound:/opt/unbound/etc/unbound'
+    networks:
+      - dns_net
     restart: unless-stopped
