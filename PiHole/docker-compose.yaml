@@ -9,9 +9,9 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     networks:
-      traefik
       dns_net:
         ipv4_address: 172.18.0.3
+      traefik: {}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
