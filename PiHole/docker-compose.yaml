@@ -10,11 +10,12 @@ services:
     image: pihole/pihole:latest
     networks:
       - traefik
-      - dns_net
+      dns_net:
+        ipv4_address: 172.18.0.3
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.rpi.home.arpa`)"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.home.arpa`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
     ports:
       - 53:53/tcp
